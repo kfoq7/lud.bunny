@@ -17,7 +17,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "scripts/navigation.js"],

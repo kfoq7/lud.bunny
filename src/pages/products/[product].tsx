@@ -20,7 +20,6 @@ export default function Product({ productInfo }: Props) {
                   src={productInfo.img}
                   alt={`Product - ${productInfo.title}`}
                   layout="fill"
-                  style={{ viewTransitionName: `products-${productInfo.id}` }}
                 />
               </div>
             </picture>
