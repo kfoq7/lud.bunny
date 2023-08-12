@@ -13,12 +13,11 @@ export default function ProductItem({ id, title, img }: Props) {
       href={`/products/${id}`}
       className="hover:scale-105 inline-block transition-all hover:contrast-125 hover:shadow-2xl"
     >
-      <div className="aspect-[389/500] rounded w-full h-full relative">
+      <div className="aspect-[389/500] rounded w-full h-full relative object-cover">
         <Image
           src={img}
           alt={`Product - ${title}`}
           layout="fill"
-          objectFit="cover"
           style={{ viewTransitionName: `products-${id}` }}
         />
       </div>

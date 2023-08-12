@@ -14,9 +14,7 @@ export default function Main({ children }: Props) {
         <meta name="title" content="lud.bunny" />
       </Head>
 
-      <header className="w-full  p-6 z-20">
-        <Navbar />
-      </header>
+      <Navbar />
 
       <div>{children}</div>
     </>

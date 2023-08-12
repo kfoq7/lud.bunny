@@ -1,31 +1,26 @@
 import Image from 'next/image'
-import { useRouter } from 'next/router'
 import Layout from '@/layouts/section'
 import { products } from '@/data/product'
+import type { GetServerSidePropsContext } from 'next'
+import type { Product } from '@/types'
 
-export default function Product() {
-  const router = useRouter()
-  const { product } = router.query
+interface Props {
+  productInfo: Product
+}
 
-  const info = products.find(p => p.id === product)
-
-  if (!info) {
-    return
-  }
-
+export default function Product({ productInfo }: Props) {
   return (
-    <Layout title={info.id}>
+    <Layout title={productInfo.id}>
       <main className="m-auto max-w-4xl">
         <div className="grid grid-cols-1 md:grid-cols-[350px_1fr] gap-x-12 mt-4 md:mt-20 px-8">
           <div className="flex flex-col mb-10">
             <picture className="mb-8 w-full relative">
               <div className="aspect-[389/500] h-full w-full object-cover rounded max-w-full">
                 <Image
-                  src={info.img}
-                  alt={`Product - ${info.title}`}
+                  src={productInfo.img}
+                  alt={`Product - ${productInfo.title}`}
                   layout="fill"
-                  objectFit="cover"
-                  style={{ viewTransitionName: `products-${info.id}` }}
+                  style={{ viewTransitionName: `products-${productInfo.id}` }}
                 />
               </div>
             </picture>
@@ -50,4 +45,23 @@ export default function Product() {
       </main>
     </Layout>
   )
+}
+
+export async function getServerSideProps({
+  params
+}: GetServerSidePropsContext) {
+  const { product } = params ?? {}
+  const productInfo = products.find(p => p.id === product)
+
+  if (!productInfo) {
+    return {
+      notFound: true
+    }
+  }
+
+  return {
+    props: {
+      productInfo
+    }
+  }
 }
